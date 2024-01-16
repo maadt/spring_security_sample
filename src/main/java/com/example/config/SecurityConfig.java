@@ -8,9 +8,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-
-
-@EnableWebSecurity // Spring Securityの設定を有効にします
+//Spring Securityの設定を有効にします
+@EnableWebSecurity 
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 // WebSecurityConfigurerAdapter：セキュリティ設定用のクラスは必ず継承する
     @Override
@@ -42,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .logoutSuccessUrl("/loginForm"); //ログアウト成功後のパス
     }
     
+    // ハッシュアルゴリズムの定義
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
