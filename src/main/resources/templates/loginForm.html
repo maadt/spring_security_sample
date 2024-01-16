@@ -15,16 +15,30 @@
         <p>ユーザ名またはパスワードが違います。</p>
     </div>
     <form th:action="@{/login}" method="post">
+	<!--
+		・CSRF対策が有効な場合、POSTでリクエストが来た場合にトークンのチェックが行われるようになる
+		・リクエストしたときにトークンがない場合はアクセスを拒否する
+		・th:action属性を使用することで、自動でトークンを追加してくれる
+		・テンプレートファイルでの記述例
+		　<input type="hidden" name="_csrf" value="33c7b13f-f3e2-44de-b0b1-eadb5e6ffbdb">
+		　 type="hidden"：ウェブページ上には表示されないことを示す
+		　 name="_csrf"：CSRFトークンの名前
+		 　value="（省略）"：CSRFトークンの実際の値
+		・簡単に言うと入場チケットみたいなもの
+	-->
+	
         <!-- @{}：リクエストURLを生成する -->
         <!-- th:action：リクエストするパスを指定 -->
         <!-- method：リクエスト方法を指定 -->
         <div>
             <label>メールアドレス：</label>
             <input type="email" name="email">
+            <!--name：SecurityConfigで設定しているusernameParameterの引数と一致させる-->
         </div>
         <div>
             <label>パスワード：</label>
             <input type="password" name="password">
+            <!--name：SecurityConfigで設定しているpasswordParameterの引数は一致させる-->
         </div>
         <div>
             <input type="submit" value="ログイン">

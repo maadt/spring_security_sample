@@ -14,6 +14,12 @@
     <!--principal：認証オブジェクト（LoginUser）のこと-->
     <!--user.name：LoginUserのuserフィールドにアクセスし、nameフィールドやemailフィールドへアクセスする-->
     <p>メールアドレス：<span sec:authentication="principal.user.email"></span></p>
+    
+    <h2>Controllerから取得</h2>
+    <p>ユーザ名：<span th:text="${user.name}"></span></p>
+    <!-- user.name；コントローラクラスでmodelにセットした値を表示する -->
+    <p>メールアドレス：<span th:text="${user.email}"></span></p>
+    <!-- user.email；コントローラクラスでmodelにセットした値を表示する -->
 
     <!-- ログアウト -->
     <form th:action="@{/logout}" method="post">
@@ -21,3 +27,37 @@
     </form>
 </body>
 </html>
+
+<!--
+	
+	認証情報の表示
+	　「#authentication」とすることで、th:ifやth:textなどの機能と組み合わせることができる。
+
+   例１）
+    <div sec:authentication="principal">
+        認証オブジェクト
+    </div>
+
+    <div th:text="${#authentication.principal}">
+        認証オブジェクト
+    </div>
+    
+    
+    例２）
+    <div sec:authentication="principal.user.id">
+        ユーザーID
+    </div>
+
+    <div th:text="${#authentication.principal.user.id}">
+        ユーザーID
+    </div>
+    
+    
+    認証情報の条件分岐
+    
+    例）
+    <div th:if="${#authentication.principal.user.id == 1}">
+        ユーザーIDが「1」の場合
+    </div>
+    
+-->
