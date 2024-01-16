@@ -10,6 +10,8 @@ import com.example.repository.UserRepository;
 
 @Service
 public class LoginUserService implements UserDetailsService {
+// LoginUserService：必ずUserDetailsServiceインターフェースを実装
+// UserDetailsService：ユーザーの認証と認可をサポートするためのインターフェースの一つ
 
     private final UserRepository userRepository;
 
@@ -19,10 +21,12 @@ public class LoginUserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-
     @Override
     // emailはユーザーから送信されるメールアドレスを想定しています
     public LoginUser loadUserByUsername(String email) throws UsernameNotFoundException {
+    // loadUserByUsername()：引数に指定されたデータを使用してユーザー情報を取得する
+    // UsernameNotFoundException：指定されたデータに対応するユーザーが見つからない場合にスローされる
+    	
         // emailによりデータベースからユーザ情報の取得
         User user = this.userRepository.findByEmail(email);
 
