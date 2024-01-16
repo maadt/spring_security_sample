@@ -22,6 +22,11 @@ repositories {
 }
 
 dependencies {
+    // Spring Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    // Thymeleaf拡張ライブラリ
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
