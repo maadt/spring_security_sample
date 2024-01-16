@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>ホーム画面</title>
+</head>
+<body>
+    <h1>Home</h1>
+    <h2>Thymeleaf拡張ライブラリ</h2>
+    <p>ユーザ名：<span sec:authentication="principal.user.name"></span></p>
+    <!--sec:authentication：認証ユーザの情報を取得する-->
+    <!--principal：認証オブジェクト（LoginUser）のこと-->
+    <!--user.name：LoginUserのuserフィールドにアクセスし、nameフィールドやemailフィールドへアクセスする-->
+    <p>メールアドレス：<span sec:authentication="principal.user.email"></span></p>
+
+    <!-- ログアウト -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="ログアウト" />
+    </form>
+</body>
+</html>
