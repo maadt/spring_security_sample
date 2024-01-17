@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>ホーム画面</title>
+</head>
+<body>
+    <h1>Home</h1>
+    <h2>Thymeleaf拡張ライブラリ</h2>
+    <p>ユーザ名：<span sec:authentication="principal.user.name"></span></p>
+    <!--sec:authentication：認証ユーザの情報を取得する-->
+    <!--principal：認証オブジェクト（LoginUser）のこと-->
+    <!--user.name：LoginUserのuserフィールドにアクセスし、nameフィールドやemailフィールドへアクセスする-->
+    <p>メールアドレス：<span sec:authentication="principal.user.email"></span></p>
+    
+    <h2>Controllerから取得</h2>
+    <p>ユーザ名：<span th:text="${user.name}"></span></p>
+    <!-- user.name；コントローラクラスでmodelにセットした値を表示する -->
+    <p>メールアドレス：<span th:text="${user.email}"></span></p>
+    <!-- user.email；コントローラクラスでmodelにセットした値を表示する -->
+    
+    <a href="/admin" sec:authorize="hasAuthority('ADMIN')">管理者用画面へ</a>
+    <!--sec:authorize：特定の権限を持っている場合に表示する-->
+    <!--hasAuthority()：特定のロールを持つことを示す-->
+    <!--ADMIN：loginUserクラスで付与されるロール名-->
+    
+    <!-- ログアウト -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="ログアウト" />
+    </form>
+</body>
+</html>
+
+<!--
+	認証情報の表示
+	　「#authentication」とすることで、th:ifやth:textなどの機能と組み合わせることができる。
+
+   例１）
+    <div sec:authentication="principal">
+        認証オブジェクト
+    </div>
+
+    <div th:text="${#authentication.principal}">
+        認証オブジェクト
+    </div>
+    
+    
+    例２）
+    <div sec:authentication="principal.user.id">
+        ユーザーID
+    </div>
+
+    <div th:text="${#authentication.principal.user.id}">
+        ユーザーID
+    </div>
+    
+    
+    認証情報の条件分岐
+    
+    例）
+    <div th:if="${#authentication.principal.user.id == 1}">
+        ユーザーIDが「1」の場合
+    </div>
+    
+-->
