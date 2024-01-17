@@ -20,7 +20,12 @@
     <!-- user.name；コントローラクラスでmodelにセットした値を表示する -->
     <p>メールアドレス：<span th:text="${user.email}"></span></p>
     <!-- user.email；コントローラクラスでmodelにセットした値を表示する -->
-
+    
+    <a href="/admin" sec:authorize="hasAuthority('ADMIN')">管理者用画面へ</a>
+    <!--sec:authorize：特定の権限を持っている場合に表示する-->
+    <!--hasAuthority()：特定のロールを持つことを示す-->
+    <!--ADMIN：loginUserクラスで付与されるロール名-->
+    
     <!-- ログアウト -->
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="ログアウト" />
@@ -29,7 +34,6 @@
 </html>
 
 <!--
-	
 	認証情報の表示
 	　「#authentication」とすることで、th:ifやth:textなどの機能と組み合わせることができる。
 

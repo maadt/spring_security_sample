@@ -23,6 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             // antMatchers()：特定のURLパターンに対して適用されるアクセス許可ルールを設定
             // "/loginForm"：/loginForm に対して
             // permitAll()：認証なしでアクセスを許可
+            .antMatchers("/admin").hasAuthority("ADMIN")
+            // hasAuthority()：特定のロールを持つオブジェクトのアクセスを許可する
             .anyRequest().authenticated();
     	    // anyRequest()：どのリクエストに対しても適用されるアクセス許可ルールを設定
     	    // authenticated()：認証が必要であることを示す

@@ -48,8 +48,19 @@ public class LoginUser implements UserDetails {
     // extends：ワイルドカード型を制限するキーワードで、特定の型またはそのサブタイプ（派生型）を受け入れる
     // GrantedAuthority：ユーザーの権限情報を表現するためのインターフェース
     // getAuthorities()：ユーザーが持つ権限（ロール）情報を取得するためのメソッド
-        return AuthorityUtils.NO_AUTHORITIES;
+    	
+        // return AuthorityUtils.NO_AUTHORITIES;
         // AuthorityUtils.NO_AUTHORITIES：何の特別な権限も持っておらず、一般的なユーザーとして扱われる
+    	
+        if (this.user.getRole().equals("管理者")) {
+        // Userオブジェクトを参照してROLEが管理者ならばtrue
+            return AuthorityUtils.createAuthorityList("ADMIN", "GENERAL");
+            // AuthorityUtils：
+            // createAuthorityList()：ユーザーのロールを設定する
+            // "ADMIN"：管理者権限
+            // "GENERAL"：一般権限
+        }
+        return AuthorityUtils.createAuthorityList("GENERAL");	
     }
 
     // アカウントの有効期限の状態を判定する

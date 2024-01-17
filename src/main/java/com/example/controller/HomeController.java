@@ -21,4 +21,9 @@ public class HomeController {
         return "home";
         // home.htmlの表示
     }
+    
+    @GetMapping("/admin")
+    public String adminPage() {
+        return "admin/index";
+    }
 }
